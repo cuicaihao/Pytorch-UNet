@@ -2,9 +2,7 @@
 
 [![xscode](https://img.shields.io/badge/Available%20on-xs%3Acode-blue?style=?style=plastic&logo=appveyor&logo=data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEAAAABACAMAAACdt4HsAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAAZQTFRF////////VXz1bAAAAAJ0Uk5T/wDltzBKAAAAlUlEQVR42uzXSwqAMAwE0Mn9L+3Ggtgkk35QwcnSJo9S+yGwM9DCooCbgn4YrJ4CIPUcQF7/XSBbx2TEz4sAZ2q1RAECBAiYBlCtvwN+KiYAlG7UDGj59MViT9hOwEqAhYCtAsUZvL6I6W8c2wcbd+LIWSCHSTeSAAECngN4xxIDSK9f4B9t377Wd7H5Nt7/Xz8eAgwAvesLRjYYPuUAAAAASUVORK5CYII=)](https://xscode.com/milesial/Pytorch-UNet)
 
-
 ![input and output for a random image in the test dataset](https://i.imgur.com/GD8FcB7.png)
-
 
 Customized implementation of the [U-Net](https://arxiv.org/abs/1505.04597) in PyTorch for Kaggle's [Carvana Image Masking Challenge](https://www.kaggle.com/c/carvana-image-masking-challenge) from high definition images.
 
@@ -13,7 +11,9 @@ This model was trained from scratch with 5000 images (no data augmentation) and 
 The Carvana data is available on the [Kaggle website](https://www.kaggle.com/c/carvana-image-masking-challenge/data).
 
 ## Usage
+
 **Note : Use Python 3.6 or newer**
+
 ### Prediction
 
 After training your model and saving it to MODEL.pth, you can easily test the output masks on your images via the CLI.
@@ -21,6 +21,10 @@ After training your model and saving it to MODEL.pth, you can easily test the ou
 To predict a single image and save it:
 
 `python predict.py -i image.jpg -o output.jpg`
+
+python predict.py -i data/imgs/0cdf5b5d0ce1_01.jpg -o output_II.jpg -m checkpoints/CP_epoch4.pth
+
+python predict.py -i data/imgs/0cdf5b5d0ce1_01.jpg -o output.jpg -m unet_checkpoint/ .pth
 
 To predict a multiple images and show them without saving them:
 
@@ -52,6 +56,7 @@ optional arguments:
   --scale SCALE, -s SCALE
                         Scale factor for the input images (default: 0.5)
 ```
+
 You can specify which model file to use with `--model MODEL.pth`.
 
 ### Training
@@ -77,19 +82,23 @@ optional arguments:
                         (default: 15.0)
 
 ```
+
 By default, the `scale` is 0.5, so if you wish to obtain better results (but use more memory), set it to 1.
 
 The input images and target masks should be in the `data/imgs` and `data/masks` folders respectively.
 
 ### Pretrained model
+
 A [pretrained model](https://github.com/milesial/Pytorch-UNet/releases/tag/v1.0) is available for the Carvana dataset. It can also be loaded from torch.hub:
 
 ```python
 net = torch.hub.load('milesial/Pytorch-UNet', 'unet_carvana')
 ```
+
 The training was done with a 100% scale and bilinear upsampling.
 
 ## Tensorboard
+
 You can visualize in real time the train and test losses, the weights and gradients, along with the model predictions with tensorboard:
 
 `tensorboard --logdir=runs`
@@ -99,14 +108,13 @@ You can find a reference training run with the Caravana dataset on [TensorBoard.
 ## Notes on memory
 
 The model has be trained from scratch on a GTX970M 3GB.
-Predicting images of 1918*1280 takes 1.5GB of memory.
+Predicting images of 1918\*1280 takes 1.5GB of memory.
 Training takes much approximately 3GB, so if you are a few MB shy of memory, consider turning off all graphical displays.
 This assumes you use bilinear up-sampling, and not transposed convolution in the model.
 
 ## Support
 
 Personalized support for issues with this repository, or integrating with your own dataset, available on [xs:code](https://xscode.com/milesial/Pytorch-UNet).
-
 
 ---
 

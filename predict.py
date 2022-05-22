@@ -16,7 +16,7 @@ from utils.dataset import BasicDataset
 def predict_img(net,
                 full_img,
                 device,
-                scale_factor=1,
+                scale_factor=0.1,
                 out_threshold=0.5):
     net.eval()
 

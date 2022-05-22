@@ -9,7 +9,7 @@ from PIL import Image
 
 
 class BasicDataset(Dataset):
-    def __init__(self, imgs_dir, masks_dir, scale=1, mask_suffix=''):
+    def __init__(self, imgs_dir, masks_dir, scale=1, mask_suffix='_mask'):
         self.imgs_dir = imgs_dir
         self.masks_dir = masks_dir
         self.scale = scale
